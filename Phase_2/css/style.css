@@ -1,0 +1,367 @@
+ @font-face {
+            font-family: "msgothic";
+            /* src: url(assets/fonts/MSGothic.ttf); */
+            /* src: url(assets/fonts/MSMincho.ttf); */
+            src: url(assets/fonts/HackGen-Regular.ttf);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial Unicode MS, Arial, "msgothic";
+        }
+
+        body * {
+            box-sizing: border-box;
+            /* border: 1px solid red; */
+            font-family: Arial Unicode MS, Arial, "msgothic";
+        }
+
+
+        /* Image showing Part */
+
+        .main-body{
+            /* border: 2px solid red; */
+            margin-top: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-bottom: 100px;
+        }
+
+   
+
+        .container {
+            position: relative;
+            display: block;
+            float: left;
+            width: 50%;
+            overflow: auto;
+            height: 100%;
+        }
+
+        .viewer img {
+            /* margin: 2px auto; */
+            /* border: 1px solid #ddd; */
+            box-shadow: 0 20px 70px 0 rgba(0, 0, 0, .09);
+            cursor: default;
+        }
+
+        .page {
+            position: relative;
+            border: 1px solid #ddd;
+            display: block;
+            margin: 0 auto;
+            /*transform: scale(0.6);
+                    transform-origin: 0 0;*/
+            box-shadow: 0 20px 70px 0 rgba(0, 0, 0, .09);
+        }
+
+        .text {
+            position: absolute;
+            display: inline-block;
+            /* line-height: 1; */
+            /* border: 1px solid red; */
+        }
+
+    
+
+        /*
+                table tr{
+                    padding:0;
+                    margin:0;
+                }
+                table td{
+                    padding:0;
+                    margin:0;
+                }
+                table td span{
+                    line-height:1;
+                    padding:0;
+                    margin:0;
+                }*/
+        .topbar {
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            position: fixed;
+            background: #000;
+            /* padding: 0 12px; */
+            top: 0;
+            z-index: 999;
+        }
+
+        .topbar .left {
+            /* display: inline-block; */
+            /*                 float: left; */
+            color: #fff176;
+            width: 150px;
+            height: 50px;
+            text-align: left;
+            padding-left: 8px;
+            font-weight: bolder;
+        }
+
+        .topbar .center {
+            text-align: center;
+            /* width: 100%; */
+            height: 50px;
+            line-height: 50px;
+        }
+
+        .center span {
+            display: inline-block;
+            text-align: center;
+            color: #fff;
+            height: 50px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        .topbar .right {
+            /*                 display: inline-block; */
+            /*                 float: right; */
+            color: #fff;
+            width: 150px;
+            height: 50px;
+            line-height: 50px;
+            text-align: right;
+            padding-right: 8px;
+        }
+
+        .right span {
+            display: inline-block;
+            text-align: center;
+            color: #fff;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        .center span img,
+        .right span img {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            opacity: 0.7;
+        }
+
+        .center span:hover img,
+        .right span:hover img {
+
+            opacity: 1;
+        }
+
+        .center span.delete img {
+            opacity: 0.4;
+        }
+
+        .center span.delete.active img {
+            opacity: 0.7 !important;
+        }
+
+        .center span.delete.active:hover img {
+            opacity: 1 !important;
+        }
+
+        .center span:hover svg path,
+        .right span:hover svg path {
+            width: 20px;
+            height: 20px;
+            fill: yellow;
+            stroke: yellow;
+        }
+
+        .main {
+            width: 100%;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50px;
+            bottom: 0;
+        }
+
+        .viewer {
+            width: 50%;
+            display: block;
+            height: 100%;
+            float: left;
+            overflow: auto;
+        }
+
+        .viewer .original-viewer {
+            width: 100%;
+        }
+
+        .viewer .image-viewer {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .viewer .image-viewer div {
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            border: 1px solid #ddd;
+            -webkit-user-select: none;
+            /* Safari */
+            -ms-user-select: none;
+            /* IE 10+ and Edge */
+            user-select: none;
+            /* Standard syntax */
+        }
+
+        .viewer .image-viewer .rectangle {
+            z-index: 100;
+            position: absolute;
+        }
+
+        .tooltip {
+            position: absolute;
+            display: inline-block;
+            border-bottom: 1px dotted #ccc;
+            color: #000000;
+            z-index: 1;
+            cursor: default;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            position: absolute;
+            width: auto;
+            background-color: rgba(0, 0, 0, 0.42);
+            color: #fff;
+            text-align: center;
+            padding: 8px 8px;
+            border-radius: 6px;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .tooltip:hover .tooltiptext,
+        .tooltip.hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .tooltip-top {
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+        }
+
+        .tooltip-top::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: rgba(0, 0, 0, 0.42) transparent transparent transparent;
+        }
+
+        .table {
+            display: table;
+        }
+
+        .table-cell {
+            display: table-cell;
+        }
+
+        .tab {
+            height: 200px;
+            width: 50px;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            background: red;
+        }
+
+        .tab-one,
+        .tab-two {
+            cursor: pointer;
+            position: fixed;
+            left: 0;
+            width: 120px;
+            padding: 5px;
+            height: 25px;
+            text-align: center;
+            background: gray;
+            color: #fff;
+            z-index: 555;
+        }
+
+        .tab-one {
+            top: 50px;
+        }
+
+        .tab-one:after {
+            /* display: inline-block; */
+            display: block;
+            width: 12px;
+            height: 12px;
+            /* border-top: 25px solid red; */
+            /* border-right: 25px solid transparent; */
+            /* z-index: 500; */
+        }
+
+        .tab-two {
+            top: 170px;
+        }
+
+        .tab-one:hover {
+            background: green;
+            height: 30px;
+            top: 45px;
+        }
+
+        .tab-two:hover {
+            background: orange;
+            height: 30px;
+            top: 165px;
+        }
+
+        .rot-neg-90 {
+            transform: rotate(-270deg);
+            transform-origin: rotate(-270deg);
+            -moz-transform: rotate(-270deg);
+            -moz-transform-origin: bottom left;
+            -webkit-transform: rotate(-270deg);
+            -webkit-transform-origin: bottom left;
+            -o-transform: rotate(-270deg);
+            -o-transform-origin: bottom left;
+            filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+        }
+
+        #modal {
+            position: fixed;
+            display: none;
+            width: 300px;
+            min-height: 110px;
+            background: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 20px 70px 0 rgba(0, 0, 0, .09);
+            padding: 10px;
+        }
+
+        #modal textarea {
+            width: 100%;
+            min-height: 50px;
+            resize: vertical;
+            border: 1px solid #ddd;
+        }
+
+        #modal-add,
+        #modal-close {
+            margin: 10px 0 0 10px;
+            padding: 4px 12px;
+            float: right;
+        }
+
+        .file-name {
+            width: 280px;
+            color: #fff;
+            padding-left: 10px;
+        }
